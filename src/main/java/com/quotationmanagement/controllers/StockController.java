@@ -40,7 +40,7 @@ public class StockController {
   }
 
   @GetMapping("/{stockId}")
-  public @ResponseBody ResponseEntity<StockResponseDTO> byStockId(
+  public @ResponseBody ResponseEntity<StockResponseDTO> findByStockId(
       @PathVariable("stockId") String stockId) {
     var result = findStockUserCase.findByStockId(stockId);
     if (result.isEmpty()) return ResponseEntity.notFound().build();

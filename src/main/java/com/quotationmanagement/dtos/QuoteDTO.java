@@ -33,7 +33,7 @@ public class QuoteDTO {
   }
 
   public static QuoteDTO parseOf(Quote quote) {
-    return new QuoteDTO(formatter.format(quote.date), quote.quantity.toString());
+    return new QuoteDTO(formatter.format(quote.date), quote.value.toString());
   }
 
   public Quote quoteValue() throws ParseException {
