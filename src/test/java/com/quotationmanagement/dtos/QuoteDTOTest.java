@@ -13,7 +13,7 @@ class QuoteDTOTest {
   @Test
   public void parseOf() {
     assertEquals("2019-01-01", QUOTE_DTO.buyDate);
-    assertEquals("10", QUOTE_DTO.quantity);
+    assertEquals("10", QUOTE_DTO.value);
   }
 
   @Test

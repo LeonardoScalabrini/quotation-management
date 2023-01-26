@@ -3,23 +3,41 @@ package com.quotationmanagement.dtos;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.quotationmanagement.domains.Quote;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import lombok.Data;
+import javax.validation.constraints.NotNull;
 
-@Data
-public class StockRequestDTO {
-  @NotBlank public final String stockId;
-  @Valid public final List<QuoteDTO> quotes;
+public class StockRequestDTO implements Serializable {
+  @NotBlank(message = "The stockId is required")
+  private String stockId;
+
+  @NotNull private List<@Valid QuoteDTO> quotes;
 
   @JsonCreator
   public StockRequestDTO(
       @JsonProperty("stockId") String stockId, @JsonProperty("quotes") List<QuoteDTO> quotes) {
     this.stockId = stockId;
+    this.quotes = quotes;
+  }
+
+  public String getStockId() {
+    return stockId;
+  }
+
+  public void setStockId(String stockId) {
+    this.stockId = stockId;
+  }
+
+  public List<QuoteDTO> getQuotes() {
+    return quotes;
+  }
+
+  public void setQuotes(List<QuoteDTO> quotes) {
     this.quotes = quotes;
   }
 

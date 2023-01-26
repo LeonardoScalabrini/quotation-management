@@ -6,9 +6,7 @@ import com.quotationmanagement.domains.Stock;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lombok.Data;
 
-@Data
 public class StockResponseDTO {
   public final String id;
   public final String stockId;
