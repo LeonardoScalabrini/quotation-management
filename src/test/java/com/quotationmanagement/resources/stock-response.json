@@ -1,0 +1,18 @@
+{
+  "id": "id",
+  "stockId": "stockid",
+  "quotes": [
+    {
+      "buyDate": "2019-01-01",
+      "quantity": "10"
+    },
+    {
+      "buyDate": "2019-01-01",
+      "quantity": "10"
+    },
+    {
+      "buyDate": "2019-01-01",
+      "quantity": "10"
+    }
+  ]
+}

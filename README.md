@@ -7,9 +7,9 @@
 mvn clean install
 ````
 
-2. Install PostgresDB
+2. Install Infraestructure
 ````
-infraestructure/docker-compose up
+docker-compose up
 ````
 
 3. Start locally
