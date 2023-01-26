@@ -20,6 +20,6 @@ class QuoteDTOTest {
   public void fromJson() throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     var result = mapper.readValue(new File(QUOTE_PATH), QuoteDTO.class);
-    assertEquals(QUOTE_PATH, result);
+    assertEquals(QUOTE_DTO, result);
   }
 }
