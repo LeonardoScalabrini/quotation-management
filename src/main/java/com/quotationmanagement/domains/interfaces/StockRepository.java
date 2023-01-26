@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface StockRepository {
 
-  Optional<Stock> findByStockId(String id);
+  Optional<Stock> findByStockCod(String stockCod);
 
   List<Stock> findAll();
 

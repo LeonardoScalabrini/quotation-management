@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class Quote {
   public final Date date;
-  public final Integer value;
+  public final Integer price;
 
-  public Quote(Date date, Integer value) {
+  public Quote(Date date, Integer price) {
     Objects.requireNonNull(date);
-    Objects.requireNonNull(value);
+    Objects.requireNonNull(price);
     this.date = date;
-    this.value = value;
+    this.price = price;
   }
 }

@@ -18,8 +18,8 @@ public class FindStockUserCaseImpl implements FindStockUserCase {
   }
 
   @Override
-  public Optional<Stock> findByStockId(String stockId) {
-    return stockRepository.findByStockId(stockId);
+  public Optional<Stock> findByStockCod(String stockCod) {
+    return stockRepository.findByStockCod(stockCod);
   }
 
   @Override

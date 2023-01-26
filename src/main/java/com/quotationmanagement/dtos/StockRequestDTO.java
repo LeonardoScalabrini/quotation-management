@@ -16,7 +16,8 @@ public class StockRequestDTO implements Serializable {
   @NotBlank(message = "The stockId is required")
   private String stockId;
 
-  @NotNull private List<@Valid QuoteDTO> quotes;
+  @NotNull(message = "The quotes are required")
+  private List<@Valid QuoteDTO> quotes;
 
   @JsonCreator
   public StockRequestDTO(

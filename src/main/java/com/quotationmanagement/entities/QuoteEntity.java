@@ -4,23 +4,25 @@ import com.quotationmanagement.domains.Quote;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import java.util.UUID;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity(name = "quote")
 public class QuoteEntity implements Serializable {
-  @Id @GeneratedValue public String id;
-  public Date date;
-  public Integer value;
+  @Id public String id = UUID.randomUUID().toString();
+  @NotNull @Column public Date date;
+  @NotNull @Column public Integer price;
 
-  @ManyToOne public StockEntity stock;
+  @NotNull
+  @AttributeOverride(name = "value", column = @Column(name = "stockId"))
+  public StockId stockId;
 
-  public static QuoteEntity valueOf(Quote quote) {
+  public static QuoteEntity valueOf(StockId stockId, Quote quote) {
     var quoteEntity = new QuoteEntity();
+    quoteEntity.stockId = stockId;
     quoteEntity.date = quote.date;
-    quoteEntity.value = quote.value;
+    quoteEntity.price = quote.price;
     return quoteEntity;
   }
 
@@ -31,16 +33,16 @@ public class QuoteEntity implements Serializable {
     QuoteEntity that = (QuoteEntity) o;
     return Objects.equals(id, that.id)
         && Objects.equals(date, that.date)
-        && Objects.equals(value, that.value)
-        && Objects.equals(stock, that.stock);
+        && Objects.equals(price, that.price)
+        && Objects.equals(stockId, that.stockId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, date, value, stock);
+    return Objects.hash(id, date, price, stockId);
   }
 
   public Quote quoteValue() {
-    return new Quote(date, value);
+    return new Quote(date, price);
   }
 }

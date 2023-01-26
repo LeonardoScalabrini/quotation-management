@@ -25,7 +25,7 @@ public class StockResponseDTO {
   public static StockResponseDTO parseOf(Stock stock) {
     return new StockResponseDTO(
         stock.id,
-        stock.stockId,
+        stock.stockCod,
         stock.quotes.stream().map(QuoteDTO::parseOf).collect(Collectors.toList()));
   }
 

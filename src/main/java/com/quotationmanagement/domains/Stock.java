@@ -6,17 +6,17 @@ import java.util.UUID;
 
 public class Stock {
   public final String id;
-  public final String stockId;
+  public final String stockCod;
   public final List<Quote> quotes;
 
-  private Stock(String id, String stockId, List<Quote> quotes) {
+  private Stock(String id, String stockCod, List<Quote> quotes) {
     Objects.requireNonNull(id);
-    Objects.requireNonNull(stockId);
+    Objects.requireNonNull(stockCod);
     Objects.requireNonNull(quotes);
     if (id.isBlank()) throw new IllegalArgumentException();
-    if (stockId.isBlank()) throw new IllegalArgumentException();
+    if (stockCod.isBlank()) throw new IllegalArgumentException();
     this.id = id;
-    this.stockId = stockId;
+    this.stockCod = stockCod;
     this.quotes = quotes;
   }
 
