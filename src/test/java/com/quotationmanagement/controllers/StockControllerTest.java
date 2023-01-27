@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-@WebMvcTest
+@WebMvcTest(StockController.class)
 class StockControllerTest {
 
   @MockBean private CreateStockUserCase createStockUserCase;
