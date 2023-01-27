@@ -47,4 +47,9 @@ public class StockRequestDTO implements Serializable {
     StockRequestDTO that = (StockRequestDTO) o;
     return Objects.equals(stockId, that.stockId) && Objects.equals(quotes, that.quotes);
   }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(stockId, quotes);
+  }
 }

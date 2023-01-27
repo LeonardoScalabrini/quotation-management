@@ -38,4 +38,9 @@ public class StockResponseDTO {
         && Objects.equals(stockId, that.stockId)
         && Objects.equals(quotes, that.quotes);
   }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, stockId, quotes);
+  }
 }

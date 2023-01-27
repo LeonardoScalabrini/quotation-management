@@ -10,14 +10,13 @@ import org.junit.jupiter.api.Test;
 class StockTest {
 
   @Test
-  public void test() {
+  void test() {
     var stock = Stock.valueOf("id", "stockId", singletonList(QUOTE));
     var equals = Stock.valueOf("id", "stockId", singletonList(QUOTE));
     var notEquals = Stock.valueOf("notEquals", "notEquals", emptyList());
     assertEquals("id", stock.id);
     assertEquals("stockId", stock.stockCod);
     assertEquals(singletonList(QUOTE), stock.quotes);
-    assertEquals(stock, stock);
     assertEquals(equals, stock);
     assertEquals(Objects.hash("id", "stockId", singletonList(QUOTE)), stock.hashCode());
     assertNotEquals(notEquals, stock);
@@ -26,7 +25,7 @@ class StockTest {
   }
 
   @Test
-  public void notNull() {
+  void notNull() {
     assertThrows(
         NullPointerException.class, () -> Stock.valueOf(null, "stockId", singletonList(QUOTE)));
     assertThrows(NullPointerException.class, () -> Stock.valueOf("id", null, singletonList(QUOTE)));

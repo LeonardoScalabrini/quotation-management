@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 class StockRequestDTOTest {
 
   @Test
-  public void fromJson() throws IOException {
+  void fromJson() throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     var result = mapper.readValue(new File(STOCK_REQUEST_PATH), StockRequestDTO.class);
     assertEquals(STOCK_REQUEST_DTO, result);

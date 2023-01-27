@@ -7,11 +7,16 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 
 public class QuoteDTO implements Serializable {
 
-  private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+  private static final SimpleDateFormat formatter;
+
+  static {
+    formatter = new SimpleDateFormat("yyyy-MM-dd");
+  }
 
   @NotBlank(message = "The buy date is required")
   private String buyDate;
@@ -50,6 +55,11 @@ public class QuoteDTO implements Serializable {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     QuoteDTO quoteDTO = (QuoteDTO) o;
-    return buyDate.equals(quoteDTO.buyDate) && value.equals(quoteDTO.value);
+    return Objects.equals(buyDate, quoteDTO.buyDate) && Objects.equals(value, quoteDTO.value);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(buyDate, value);
   }
 }
