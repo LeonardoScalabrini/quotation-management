@@ -32,4 +32,8 @@ public class StockManagerServiceCache implements StockManagerService {
   public List<StockManagerNotificationDTO> notification(StockManagerNotificationDTO request) {
     return stockManagerService.notification(request);
   }
+
+  public void clean() {
+    cache = null;
+  }
 }
