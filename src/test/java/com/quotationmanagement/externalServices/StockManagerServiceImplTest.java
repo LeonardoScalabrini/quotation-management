@@ -5,9 +5,11 @@ import static com.quotationmanagement.fixture.Fixture.*;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
+import com.quotationmanagement.applicationEvents.StartupEvent;
 import com.quotationmanagement.configurations.StockManagerConfig;
 import java.io.IOException;
 import org.junit.jupiter.api.*;
@@ -23,10 +25,12 @@ class StockManagerServiceImplTest {
 
   @Autowired public StockManagerServiceImpl stockManagerServiceImpl;
 
+  @MockBean public StartupEvent startupEvent;
   @MockBean public StockManagerConfig stockManagerConfig;
 
   @BeforeEach
   void setUp() {
+    doNothing().when(startupEvent).afterStartup();
     when(stockManagerConfig.getUrl()).thenReturn("http://localhost:7777");
   }
 

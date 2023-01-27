@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StockManagerConfigTest {
+class ApplicationConfigTest {
 
-  @Autowired private StockManagerConfig stockManagerConfig;
+  @Autowired private ApplicationConfig applicationConfig;
 
   @Test
-  public void url() {
-    assertEquals("http://localhost:8080", stockManagerConfig.getUrl());
+  void getPort() {
+    assertEquals("localhost", applicationConfig.getHost());
+  }
+
+  @Test
+  void getHost() {
+    assertEquals(8081, applicationConfig.getPort());
   }
 }
