@@ -12,23 +12,34 @@ import javax.validation.constraints.NotBlank;
 public class StockEntity implements Serializable {
   @AttributeOverride(name = "value", column = @Column(name = "id"))
   @EmbeddedId()
-  public StockId id;
+  private StockId id;
 
-  @NotBlank public String stockCod;
+  @NotBlank private String stockCod;
+
+  private StockEntity() {}
+
+  private StockEntity(StockId id, String stockCod) {
+    this.id = id;
+    this.stockCod = stockCod;
+  }
+
+  public StockId getId() {
+    return id;
+  }
+
+  public String getStockCod() {
+    return stockCod;
+  }
 
   public Stock stockValue(List<QuoteEntity> quotes) {
     return Stock.valueOf(
-        id.value,
+        id.getValue(),
         stockCod,
         quotes.stream().map(QuoteEntity::quoteValue).collect(Collectors.toList()));
   }
 
   public static StockEntity valueOf(Stock stock) {
-    var stockEntity = new StockEntity();
-    stockEntity.id = new StockId();
-    stockEntity.id.value = stock.id;
-    stockEntity.stockCod = stock.stockCod;
-    return stockEntity;
+    return new StockEntity(StockId.valueOf(stock.id), stock.stockCod);
   }
 
   @Override

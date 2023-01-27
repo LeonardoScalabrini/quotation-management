@@ -10,20 +10,44 @@ import javax.validation.constraints.NotNull;
 
 @Entity(name = "quote")
 public class QuoteEntity implements Serializable {
-  @Id public String id = UUID.randomUUID().toString();
-  @NotNull @Column public Date date;
-  @NotNull @Column public Integer price;
+  @Id private String id = UUID.randomUUID().toString();
+  @NotNull @Column private Date date;
+  @NotNull @Column private Integer price;
 
   @NotNull
   @AttributeOverride(name = "value", column = @Column(name = "stockId"))
-  public StockId stockId;
+  private StockId stockId;
+
+  private QuoteEntity() {}
+
+  private QuoteEntity(Date date, Integer price, StockId stockId) {
+    this.date = date;
+    this.price = price;
+    this.stockId = stockId;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public Date getDate() {
+    return date;
+  }
+
+  public Integer getPrice() {
+    return price;
+  }
+
+  public StockId getStockId() {
+    return stockId;
+  }
 
   public static QuoteEntity valueOf(StockId stockId, Quote quote) {
-    var quoteEntity = new QuoteEntity();
-    quoteEntity.stockId = stockId;
-    quoteEntity.date = quote.date;
-    quoteEntity.price = quote.price;
-    return quoteEntity;
+    return new QuoteEntity(quote.date, quote.price, stockId);
+  }
+
+  public Quote quoteValue() {
+    return new Quote(date, price);
   }
 
   @Override
@@ -40,9 +64,5 @@ public class QuoteEntity implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(id, date, price, stockId);
-  }
-
-  public Quote quoteValue() {
-    return new Quote(date, price);
   }
 }

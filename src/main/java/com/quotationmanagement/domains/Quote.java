@@ -13,4 +13,17 @@ public class Quote {
     this.date = date;
     this.price = price;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Quote quote = (Quote) o;
+    return Objects.equals(date, quote.date) && Objects.equals(price, quote.price);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(date, price);
+  }
 }

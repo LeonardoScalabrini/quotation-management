@@ -30,7 +30,7 @@ public class StockRepositoryImpl implements StockRepository {
     var result = stockJpaRepository.findByStockCod(cod);
     if (result.isEmpty()) return Optional.empty();
     var stock = result.orElseThrow();
-    var quotes = quoteJpaRepository.findAllByStockId(stock.id);
+    var quotes = quoteJpaRepository.findAllByStockId(stock.getId());
     return Optional.of(stock.stockValue(quotes));
   }
 
@@ -38,7 +38,7 @@ public class StockRepositoryImpl implements StockRepository {
   public List<Stock> findAll() {
     var result = stockJpaRepository.findAll();
     return result.stream()
-        .map(s -> s.stockValue(quoteJpaRepository.findAllByStockId(s.id)))
+        .map(s -> s.stockValue(quoteJpaRepository.findAllByStockId(s.getId())))
         .collect(Collectors.toList());
   }
 
@@ -48,7 +48,7 @@ public class StockRepositoryImpl implements StockRepository {
     var stockEntity = stockJpaRepository.save(StockEntity.valueOf(stock));
     quoteJpaRepository.saveAll(
         stock.quotes.stream()
-            .map(q -> QuoteEntity.valueOf(stockEntity.id, q))
+            .map(q -> QuoteEntity.valueOf(stockEntity.getId(), q))
             .collect(Collectors.toList()));
     return stock;
   }

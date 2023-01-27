@@ -30,16 +30,8 @@ public class StockRequestDTO implements Serializable {
     return stockId;
   }
 
-  public void setStockId(String stockId) {
-    this.stockId = stockId;
-  }
-
   public List<QuoteDTO> getQuotes() {
     return quotes;
-  }
-
-  public void setQuotes(List<QuoteDTO> quotes) {
-    this.quotes = quotes;
   }
 
   public List<Quote> quotesValue() throws ParseException {
@@ -54,10 +46,5 @@ public class StockRequestDTO implements Serializable {
     if (o == null || getClass() != o.getClass()) return false;
     StockRequestDTO that = (StockRequestDTO) o;
     return Objects.equals(stockId, that.stockId) && Objects.equals(quotes, that.quotes);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(stockId, quotes);
   }
 }

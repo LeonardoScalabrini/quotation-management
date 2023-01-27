@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 import javax.validation.constraints.NotBlank;
 
 public class QuoteDTO implements Serializable {
@@ -24,16 +23,8 @@ public class QuoteDTO implements Serializable {
     return buyDate;
   }
 
-  public void setBuyDate(String buyDate) {
-    this.buyDate = buyDate;
-  }
-
   public String getValue() {
     return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
   }
 
   @JsonCreator
@@ -60,10 +51,5 @@ public class QuoteDTO implements Serializable {
     if (o == null || getClass() != o.getClass()) return false;
     QuoteDTO quoteDTO = (QuoteDTO) o;
     return buyDate.equals(quoteDTO.buyDate) && value.equals(quoteDTO.value);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(buyDate, value);
   }
 }
