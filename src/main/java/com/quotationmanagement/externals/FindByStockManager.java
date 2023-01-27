@@ -1,7 +1,7 @@
-package com.quotationmanagement.externalServices;
+package com.quotationmanagement.externals;
 
 import com.quotationmanagement.domains.interfaces.FindRegistredStock;
-import com.quotationmanagement.externalServices.interfaces.StockManagerService;
+import com.quotationmanagement.externals.interfaces.StockManagerService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,9 @@
-package com.quotationmanagement.externalServices;
+package com.quotationmanagement.externals;
 
 import com.quotationmanagement.configurations.StockManagerConfig;
 import com.quotationmanagement.dtos.StockManagerDTO;
 import com.quotationmanagement.dtos.StockManagerNotificationDTO;
-import com.quotationmanagement.externalServices.interfaces.StockManagerService;
+import com.quotationmanagement.externals.interfaces.StockManagerService;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;

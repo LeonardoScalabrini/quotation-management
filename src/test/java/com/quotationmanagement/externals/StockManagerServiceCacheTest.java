@@ -1,4 +1,4 @@
-package com.quotationmanagement.externalServices;
+package com.quotationmanagement.externals;
 
 import static com.quotationmanagement.fixture.Fixture.*;
 import static java.util.Collections.*;

@@ -12,7 +12,7 @@ class StockManagerConfigTest {
   @Autowired private StockManagerConfig stockManagerConfig;
 
   @Test
-  public void url() {
+  void url() {
     assertEquals("http://localhost:8080", stockManagerConfig.getUrl());
   }
 }

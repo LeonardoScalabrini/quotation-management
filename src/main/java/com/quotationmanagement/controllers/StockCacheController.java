@@ -1,6 +1,6 @@
 package com.quotationmanagement.controllers;
 
-import com.quotationmanagement.externalServices.StockManagerServiceCache;
+import com.quotationmanagement.externals.StockManagerServiceCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

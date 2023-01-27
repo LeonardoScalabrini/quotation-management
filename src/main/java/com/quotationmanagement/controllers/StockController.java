@@ -30,7 +30,7 @@ public class StockController {
   }
 
   @PostMapping()
-  public @ResponseBody ResponseEntity<?> save(@Valid @RequestBody StockRequestDTO stockRequestDTO) {
+  public @ResponseBody ResponseEntity save(@Valid @RequestBody StockRequestDTO stockRequestDTO) {
     try {
       Stock result =
           createStockUserCase.create(stockRequestDTO.getStockId(), stockRequestDTO.quotesValue());

@@ -1,4 +1,4 @@
-package com.quotationmanagement.externalServices;
+package com.quotationmanagement.externals;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.quotationmanagement.fixture.Fixture.*;
@@ -9,8 +9,8 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
-import com.quotationmanagement.applicationEvents.StartupEvent;
 import com.quotationmanagement.configurations.StockManagerConfig;
+import com.quotationmanagement.events.StartupEvent;
 import java.io.IOException;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

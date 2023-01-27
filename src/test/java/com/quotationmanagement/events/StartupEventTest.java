@@ -1,11 +1,10 @@
-package com.quotationmanagement.applicationEvents;
+package com.quotationmanagement.events;
 
 import static com.quotationmanagement.fixture.Fixture.STOCK_MANAGER_NOTIFICATION_DTO;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import com.quotationmanagement.configurations.ApplicationConfig;
-import com.quotationmanagement.externalServices.interfaces.StockManagerService;
+import com.quotationmanagement.externals.interfaces.StockManagerService;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

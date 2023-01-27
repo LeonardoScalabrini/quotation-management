@@ -1,4 +1,4 @@
-package com.quotationmanagement.externalServices.interfaces;
+package com.quotationmanagement.externals.interfaces;
 
 import com.quotationmanagement.dtos.StockManagerDTO;
 import com.quotationmanagement.dtos.StockManagerNotificationDTO;

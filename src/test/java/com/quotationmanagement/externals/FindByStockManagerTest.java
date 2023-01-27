@@ -1,10 +1,10 @@
-package com.quotationmanagement.externalServices;
+package com.quotationmanagement.externals;
 
 import static com.quotationmanagement.fixture.Fixture.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-import com.quotationmanagement.externalServices.interfaces.StockManagerService;
+import com.quotationmanagement.externals.interfaces.StockManagerService;
 import java.util.Collections;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;

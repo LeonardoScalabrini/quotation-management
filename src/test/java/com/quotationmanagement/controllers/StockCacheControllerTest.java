@@ -1,11 +1,10 @@
 package com.quotationmanagement.controllers;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.quotationmanagement.externalServices.StockManagerServiceCache;
+import com.quotationmanagement.externals.StockManagerServiceCache;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
