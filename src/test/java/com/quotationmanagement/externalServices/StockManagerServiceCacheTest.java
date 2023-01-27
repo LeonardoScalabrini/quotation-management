@@ -28,6 +28,7 @@ class StockManagerServiceCacheTest {
 
   @Test
   void getStocks() {
+    stockManagerServiceCache.clean();
     var result = stockManagerServiceCache.getStocks();
     var result2 = stockManagerServiceCache.getStocks();
     assertEquals(singletonList(STOCK_MANAGER_DTO), result);
@@ -40,5 +41,15 @@ class StockManagerServiceCacheTest {
     var result = stockManagerServiceCache.notification(any());
     assertEquals(singletonList(STOCK_MANAGER_NOTIFICATION_DTO), result);
     verify(stockManagerService, times(1)).notification(any());
+  }
+
+  @Test
+  void clean() {
+    var result = stockManagerServiceCache.getStocks();
+    stockManagerServiceCache.clean();
+    var result2 = stockManagerServiceCache.getStocks();
+    assertEquals(singletonList(STOCK_MANAGER_DTO), result);
+    assertEquals(singletonList(STOCK_MANAGER_DTO), result2);
+    verify(stockManagerService, times(2)).getStocks();
   }
 }
