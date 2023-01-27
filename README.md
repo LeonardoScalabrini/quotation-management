@@ -1,5 +1,7 @@
 # quotation-management
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=leonardoscalabrini_quotation-management&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=leonardoscalabrini_quotation-management)
+
 ## Dev quick start ##
 
 1. Install dependencies

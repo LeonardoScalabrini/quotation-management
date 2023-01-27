@@ -12,12 +12,6 @@ import javax.validation.constraints.NotBlank;
 
 public class QuoteDTO implements Serializable {
 
-  private static final SimpleDateFormat formatter;
-
-  static {
-    formatter = new SimpleDateFormat("yyyy-MM-dd");
-  }
-
   @NotBlank(message = "The buy date is required")
   private String buyDate;
 
@@ -39,15 +33,16 @@ public class QuoteDTO implements Serializable {
   }
 
   public static QuoteDTO parseOf(Date buyDate, Integer quantity) {
-    return new QuoteDTO(formatter.format(buyDate), quantity.toString());
+    return new QuoteDTO(new SimpleDateFormat("yyyy-MM-dd").format(buyDate), quantity.toString());
   }
 
   public static QuoteDTO parseOf(Quote quote) {
-    return new QuoteDTO(formatter.format(quote.date), quote.price.toString());
+    return new QuoteDTO(
+        new SimpleDateFormat("yyyy-MM-dd").format(quote.date), quote.price.toString());
   }
 
   public Quote quoteValue() throws ParseException {
-    return new Quote(formatter.parse(buyDate), Integer.valueOf(value));
+    return new Quote(new SimpleDateFormat("yyyy-MM-dd").parse(buyDate), Integer.valueOf(value));
   }
 
   @Override
