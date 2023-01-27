@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class StockResponseDTO implements Serializable {
   public final String id;
   public final String stockId;
-  private final List<QuoteDTO> quotes;
+  public final List<QuoteDTO> quotes;
 
   @JsonCreator
   public StockResponseDTO(
