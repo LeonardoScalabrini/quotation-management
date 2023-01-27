@@ -14,7 +14,9 @@ public class StockEntity implements Serializable {
   @EmbeddedId()
   private StockId id;
 
-  @NotBlank private String stockCod;
+  @Column(unique = true)
+  @NotBlank
+  private String stockCod;
 
   private StockEntity() {}
 

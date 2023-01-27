@@ -45,7 +45,10 @@ public class StockRepositoryImpl implements StockRepository {
   @Override
   @Transactional
   public Stock save(Stock stock) {
-    var stockEntity = stockJpaRepository.save(StockEntity.valueOf(stock));
+    var stockEntity =
+        stockJpaRepository
+            .findByStockCod(stock.stockCod)
+            .orElseGet(() -> stockJpaRepository.save(StockEntity.valueOf(stock)));
     quoteJpaRepository.saveAll(
         stock.quotes.stream()
             .map(q -> QuoteEntity.valueOf(stockEntity.getId(), q))
