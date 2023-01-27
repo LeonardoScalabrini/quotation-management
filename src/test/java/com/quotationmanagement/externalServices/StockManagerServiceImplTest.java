@@ -19,9 +19,9 @@ import org.springframework.web.client.HttpStatusCodeException;
 
 @SpringBootTest
 @WireMockTest(httpPort = 7777)
-class StockManagerServiceTest {
+class StockManagerServiceImplTest {
 
-  @Autowired public StockManagerService stockManagerService;
+  @Autowired public StockManagerServiceImpl stockManagerServiceImpl;
 
   @MockBean public StockManagerConfig stockManagerConfig;
 
@@ -39,7 +39,7 @@ class StockManagerServiceTest {
                     .withStatus(HttpStatus.OK.value())
                     .withHeader("Content-Type", "application/json")
                     .withBody(fromJson(singletonList(STOCK_MANAGER_DTO)))));
-    var result = stockManagerService.getStocks();
+    var result = stockManagerServiceImpl.getStocks();
     assertEquals(singletonList(STOCK_MANAGER_DTO), result);
   }
 
@@ -51,7 +51,7 @@ class StockManagerServiceTest {
                 aResponse()
                     .withStatus(HttpStatus.OK.value())
                     .withHeader("Content-Type", "application/json")));
-    var result = stockManagerService.getStocks();
+    var result = stockManagerServiceImpl.getStocks();
     assertEquals(emptyList(), result);
   }
 
@@ -63,7 +63,7 @@ class StockManagerServiceTest {
                 aResponse()
                     .withStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
                     .withHeader("Content-Type", "application/json")));
-    assertThrows(HttpStatusCodeException.class, () -> stockManagerService.getStocks());
+    assertThrows(HttpStatusCodeException.class, () -> stockManagerServiceImpl.getStocks());
   }
 
   @Test
@@ -74,7 +74,7 @@ class StockManagerServiceTest {
                 aResponse()
                     .withStatus(HttpStatus.NOT_FOUND.value())
                     .withHeader("Content-Type", "application/json")));
-    assertThrows(HttpStatusCodeException.class, () -> stockManagerService.getStocks());
+    assertThrows(HttpStatusCodeException.class, () -> stockManagerServiceImpl.getStocks());
   }
 
   @Test
@@ -87,7 +87,7 @@ class StockManagerServiceTest {
                     .withStatus(HttpStatus.OK.value())
                     .withHeader("Content-Type", "application/json")
                     .withBody(fromJson(singletonList(STOCK_MANAGER_NOTIFICATION_DTO)))));
-    var result = stockManagerService.notification(STOCK_MANAGER_NOTIFICATION_DTO);
+    var result = stockManagerServiceImpl.notification(STOCK_MANAGER_NOTIFICATION_DTO);
     assertEquals(singletonList(STOCK_MANAGER_NOTIFICATION_DTO), result);
   }
 
@@ -100,7 +100,7 @@ class StockManagerServiceTest {
                 aResponse()
                     .withStatus(HttpStatus.OK.value())
                     .withHeader("Content-Type", "application/json")));
-    var result = stockManagerService.notification(STOCK_MANAGER_NOTIFICATION_DTO);
+    var result = stockManagerServiceImpl.notification(STOCK_MANAGER_NOTIFICATION_DTO);
     assertEquals(emptyList(), result);
   }
 
@@ -116,6 +116,6 @@ class StockManagerServiceTest {
                     .withBody(fromJson(singletonList(STOCK_MANAGER_NOTIFICATION_DTO)))));
     assertThrows(
         HttpStatusCodeException.class,
-        () -> stockManagerService.notification(STOCK_MANAGER_NOTIFICATION_DTO));
+        () -> stockManagerServiceImpl.notification(STOCK_MANAGER_NOTIFICATION_DTO));
   }
 }

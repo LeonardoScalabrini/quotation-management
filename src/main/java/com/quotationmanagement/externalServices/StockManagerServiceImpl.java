@@ -3,6 +3,7 @@ package com.quotationmanagement.externalServices;
 import com.quotationmanagement.configurations.StockManagerConfig;
 import com.quotationmanagement.dtos.StockManagerDTO;
 import com.quotationmanagement.dtos.StockManagerNotificationDTO;
+import com.quotationmanagement.externalServices.interfaces.StockManagerService;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -11,13 +12,13 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class StockManagerService {
+public class StockManagerServiceImpl implements StockManagerService {
 
   private final RestTemplate restTemplate;
   private final StockManagerConfig stockManagerConfig;
 
   @Autowired
-  public StockManagerService(
+  public StockManagerServiceImpl(
       RestTemplateBuilder restTemplateBuilder, StockManagerConfig stockManagerConfig) {
     this.restTemplate = restTemplateBuilder.build();
     this.stockManagerConfig = stockManagerConfig;

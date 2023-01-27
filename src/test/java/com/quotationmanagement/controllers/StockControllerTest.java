@@ -5,6 +5,7 @@ import static java.util.Collections.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.quotationmanagement.domains.exceptions.StockNotRegistredException;
 import com.quotationmanagement.domains.interfaces.CreateStockUserCase;
 import com.quotationmanagement.domains.interfaces.FindStockUserCase;
 import com.quotationmanagement.dtos.QuoteDTO;
@@ -28,7 +29,7 @@ class StockControllerTest {
   @Autowired private MockMvc mockMvc;
 
   @BeforeEach
-  void setUp() {
+  void setUp() throws StockNotRegistredException {
     when(createStockUserCase.create(anyString(), anyList())).thenReturn(STOCK);
     when(findStockUserCase.findAll()).thenReturn(singletonList(STOCK));
     when(findStockUserCase.findByStockCod("id")).thenReturn(Optional.of(STOCK));
@@ -82,6 +83,21 @@ class StockControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isBadRequest());
     verify(createStockUserCase, times(0)).create(anyString(), anyList());
+  }
+
+  @Test
+  void saveWithStockIdNotRegistred() throws Exception {
+    doThrow(StockNotRegistredException.class)
+        .when(createStockUserCase)
+        .create(anyString(), anyList());
+    mockMvc
+        .perform(
+            MockMvcRequestBuilders.post("/stocks")
+                .content(fromJson(STOCK_REQUEST_DTO))
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isInternalServerError());
+
+    verify(createStockUserCase, times(1)).create(anyString(), anyList());
   }
 
   @Test

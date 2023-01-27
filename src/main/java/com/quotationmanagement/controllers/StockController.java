@@ -1,5 +1,7 @@
 package com.quotationmanagement.controllers;
 
+import com.quotationmanagement.domains.Stock;
+import com.quotationmanagement.domains.exceptions.StockNotRegistredException;
 import com.quotationmanagement.domains.interfaces.CreateStockUserCase;
 import com.quotationmanagement.domains.interfaces.FindStockUserCase;
 import com.quotationmanagement.dtos.StockRequestDTO;
@@ -28,11 +30,14 @@ public class StockController {
   }
 
   @PostMapping()
-  public @ResponseBody ResponseEntity<StockResponseDTO> save(
-      @Valid @RequestBody StockRequestDTO stockRequestDTO) throws ParseException {
-    var result =
-        createStockUserCase.create(stockRequestDTO.getStockId(), stockRequestDTO.quotesValue());
-    return ResponseEntity.status(HttpStatus.CREATED).body(StockResponseDTO.parseOf(result));
+  public @ResponseBody ResponseEntity<?> save(@Valid @RequestBody StockRequestDTO stockRequestDTO) {
+    try {
+      Stock result =
+          createStockUserCase.create(stockRequestDTO.getStockId(), stockRequestDTO.quotesValue());
+      return ResponseEntity.status(HttpStatus.CREATED).body(StockResponseDTO.parseOf(result));
+    } catch (StockNotRegistredException | ParseException e) {
+      return ResponseEntity.internalServerError().body(e.getMessage());
+    }
   }
 
   @GetMapping()
