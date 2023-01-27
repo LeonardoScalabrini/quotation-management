@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class StockController {
       @Valid @RequestBody StockRequestDTO stockRequestDTO) throws ParseException {
     var result =
         createStockUserCase.create(stockRequestDTO.getStockId(), stockRequestDTO.quotesValue());
-    return ResponseEntity.ok(StockResponseDTO.parseOf(result));
+    return ResponseEntity.status(HttpStatus.CREATED).body(StockResponseDTO.parseOf(result));
   }
 
   @GetMapping()

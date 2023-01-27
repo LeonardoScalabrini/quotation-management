@@ -14,9 +14,7 @@ public class StockEntity implements Serializable {
   @EmbeddedId()
   public StockId id;
 
-  @NotBlank
-  @Column(unique = true)
-  public String stockCod;
+  @NotBlank public String stockCod;
 
   public Stock stockValue(List<QuoteEntity> quotes) {
     return Stock.valueOf(
