@@ -16,6 +16,6 @@ class StockManagerConfigTest {
 
   @Test
   public void url() {
-    assertEquals("http://localhost:8080/", stockManagerConfig.url);
+    assertEquals("http://localhost:8080", stockManagerConfig.getUrl());
   }
 }

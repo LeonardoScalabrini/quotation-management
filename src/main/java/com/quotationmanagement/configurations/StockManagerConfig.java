@@ -6,10 +6,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class StockManagerConfig {
-  public final String url;
+  private String url;
 
   @Autowired
   public StockManagerConfig(@Value("${stock.manager.url}") String url) {
     this.url = url;
+  }
+
+  public String getUrl() {
+    return url;
   }
 }

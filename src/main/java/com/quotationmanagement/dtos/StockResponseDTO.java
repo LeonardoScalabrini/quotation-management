@@ -3,11 +3,12 @@ package com.quotationmanagement.dtos;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.quotationmanagement.domains.Stock;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class StockResponseDTO {
+public class StockResponseDTO implements Serializable {
   public final String id;
   public final String stockId;
   public final List<QuoteDTO> quotes;
