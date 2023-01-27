@@ -28,7 +28,7 @@ class StockManagerServiceCacheTest {
 
   @Test
   void getStocks() {
-    stockManagerServiceCache.clean();
+    StockManagerServiceCache.clean();
     var result = stockManagerServiceCache.getStocks();
     var result2 = stockManagerServiceCache.getStocks();
     assertEquals(singletonList(STOCK_MANAGER_DTO), result);
@@ -46,7 +46,7 @@ class StockManagerServiceCacheTest {
   @Test
   void clean() {
     var result = stockManagerServiceCache.getStocks();
-    stockManagerServiceCache.clean();
+    StockManagerServiceCache.clean();
     var result2 = stockManagerServiceCache.getStocks();
     assertEquals(singletonList(STOCK_MANAGER_DTO), result);
     assertEquals(singletonList(STOCK_MANAGER_DTO), result2);

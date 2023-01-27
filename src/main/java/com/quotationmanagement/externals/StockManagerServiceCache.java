@@ -33,7 +33,7 @@ public class StockManagerServiceCache implements StockManagerService {
     return stockManagerService.notification(request);
   }
 
-  public void clean() {
+  public static void clean() {
     cache = null;
   }
 }
