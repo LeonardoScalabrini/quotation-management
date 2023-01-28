@@ -1,5 +1,7 @@
 package com.quotationmanagement.controllers;
 
+import static java.util.stream.Collectors.*;
+
 import com.quotationmanagement.domains.Stock;
 import com.quotationmanagement.domains.exceptions.StockNotRegistredException;
 import com.quotationmanagement.domains.interfaces.CreateStockUserCase;
@@ -8,7 +10,6 @@ import com.quotationmanagement.dtos.StockRequestDTO;
 import com.quotationmanagement.dtos.StockResponseDTO;
 import java.text.ParseException;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,8 +45,7 @@ public class StockController {
   public @ResponseBody ResponseEntity<List<StockResponseDTO>> list() {
     var result = findStockUserCase.findAll();
     if (result.isEmpty()) return ResponseEntity.noContent().build();
-    return ResponseEntity.ok(
-        result.stream().map(StockResponseDTO::parseOf).collect(Collectors.toList()));
+    return ResponseEntity.ok(result.stream().map(StockResponseDTO::parseOf).collect(toList()));
   }
 
   @GetMapping("/{stockId}")

@@ -1,31 +1,36 @@
 package com.quotationmanagement.entities;
 
+import static java.util.stream.Collectors.*;
+
 import com.quotationmanagement.domains.Stock;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import org.hibernate.annotations.Immutable;
 
+@Immutable
 @Entity(name = "stock")
 public class StockEntity implements Serializable {
-  @AttributeOverride(name = "value", column = @Column(name = "id"))
-  @EmbeddedId()
-  private StockId id;
+  @Id private String id;
 
   @Column(unique = true)
   @NotBlank
   private String stockCod;
 
+  @OneToMany(mappedBy = "stock", orphanRemoval = true)
+  private List<QuoteEntity> quotes = new ArrayList<>();
+
   private StockEntity() {}
 
-  private StockEntity(StockId id, String stockCod) {
+  private StockEntity(String id, String stockCod) {
     this.id = id;
     this.stockCod = stockCod;
   }
 
-  public StockId getId() {
+  public String getId() {
     return id;
   }
 
@@ -33,15 +38,17 @@ public class StockEntity implements Serializable {
     return stockCod;
   }
 
-  public Stock stockValue(List<QuoteEntity> quotes) {
+  public List<QuoteEntity> getQuotes() {
+    return quotes;
+  }
+
+  public Stock stockValue() {
     return Stock.valueOf(
-        id.getValue(),
-        stockCod,
-        quotes.stream().map(QuoteEntity::quoteValue).collect(Collectors.toList()));
+        id, stockCod, quotes.stream().map(QuoteEntity::quoteValue).collect(toList()));
   }
 
   public static StockEntity valueOf(Stock stock) {
-    return new StockEntity(StockId.valueOf(stock.id), stock.stockCod);
+    return new StockEntity(stock.id, stock.stockCod);
   }
 
   @Override

@@ -13,8 +13,8 @@ public class Stock {
     Objects.requireNonNull(id);
     Objects.requireNonNull(stockCod);
     Objects.requireNonNull(quotes);
-    if (id.isBlank()) throw new IllegalArgumentException();
-    if (stockCod.isBlank()) throw new IllegalArgumentException();
+    if (id.isBlank()) throw new NullPointerException();
+    if (stockCod.isBlank()) throw new NullPointerException();
     this.id = id;
     this.stockCod = stockCod;
     this.quotes = quotes;

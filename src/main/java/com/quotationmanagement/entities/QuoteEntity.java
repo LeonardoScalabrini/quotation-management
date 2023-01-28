@@ -7,23 +7,25 @@ import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.Immutable;
 
+@Immutable
 @Entity(name = "quote")
 public class QuoteEntity implements Serializable {
   @Id private String id = UUID.randomUUID().toString();
   @NotNull @Column private Date date;
   @NotNull @Column private Integer price;
 
-  @NotNull
-  @AttributeOverride(name = "value", column = @Column(name = "stockId"))
-  private StockId stockId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "fk_stock")
+  private StockEntity stock;
 
   private QuoteEntity() {}
 
-  private QuoteEntity(Date date, Integer price, StockId stockId) {
+  private QuoteEntity(Date date, Integer price, StockEntity stock) {
     this.date = date;
     this.price = price;
-    this.stockId = stockId;
+    this.stock = stock;
   }
 
   public String getId() {
@@ -38,12 +40,12 @@ public class QuoteEntity implements Serializable {
     return price;
   }
 
-  public StockId getStockId() {
-    return stockId;
+  public StockEntity getStock() {
+    return stock;
   }
 
-  public static QuoteEntity valueOf(StockId stockId, Quote quote) {
-    return new QuoteEntity(quote.date, quote.price, stockId);
+  public static QuoteEntity valueOf(StockEntity stock, Quote quote) {
+    return new QuoteEntity(quote.date, quote.price, stock);
   }
 
   public Quote quoteValue() {
@@ -58,11 +60,11 @@ public class QuoteEntity implements Serializable {
     return Objects.equals(id, that.id)
         && Objects.equals(date, that.date)
         && Objects.equals(price, that.price)
-        && Objects.equals(stockId, that.stockId);
+        && Objects.equals(stock, that.stock);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, date, price, stockId);
+    return Objects.hash(id, date, price, stock);
   }
 }

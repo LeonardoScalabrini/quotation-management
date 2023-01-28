@@ -18,11 +18,9 @@ public class FindByStockManager implements FindRegistredStock {
 
   @Override
   public Optional<String> find(String stockId) {
-    var result = stockManagerService.getStocks();
-    var match =
-        result.stream()
-            .filter(stockManagerDTO -> stockManagerDTO.id.equalsIgnoreCase(stockId))
-            .findFirst();
-    return match.map(stockManagerDTO -> stockId);
+    return stockManagerService.getStocks().stream()
+        .filter(stockManagerDTO -> stockManagerDTO.id.equalsIgnoreCase(stockId))
+        .map(stockManagerDTO -> stockManagerDTO.id)
+        .findAny();
   }
 }

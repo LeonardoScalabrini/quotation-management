@@ -26,15 +26,13 @@ class StockRepositoryImplTest {
   @Mock private QuoteJpaRepository quoteJpaRepository;
   @InjectMocks private StockRepositoryImpl stockRepository;
   private StockEntity stockEntity = StockEntity.valueOf(STOCK);
-  private QuoteEntity quoteEntity = QuoteEntity.valueOf(stockEntity.getId(), QUOTE);
+  private QuoteEntity quoteEntity = QuoteEntity.valueOf(stockEntity, QUOTE);
 
   @BeforeEach
   void setUp() {
     when(stockJpaRepository.findByStockCod("id")).thenReturn(Optional.of(stockEntity));
     when(stockJpaRepository.findAll()).thenReturn(singletonList(stockEntity));
     when(stockJpaRepository.save(any())).thenReturn(stockEntity);
-    when(quoteJpaRepository.findAllByStockId(stockEntity.getId()))
-        .thenReturn(singletonList(quoteEntity));
     when(quoteJpaRepository.saveAll(any())).thenReturn(singletonList(quoteEntity));
   }
 
@@ -42,9 +40,8 @@ class StockRepositoryImplTest {
   void findByStockCod() {
     var result = stockRepository.findByStockCod("id");
     assertTrue(result.isPresent());
-    assertEquals(stockEntity.stockValue(singletonList(quoteEntity)), result.orElseThrow());
+    assertEquals(stockEntity.stockValue(), result.orElseThrow());
     verify(stockJpaRepository, times(1)).findByStockCod("id");
-    verify(quoteJpaRepository, times(1)).findAllByStockId(stockEntity.getId());
   }
 
   @Test
@@ -53,25 +50,13 @@ class StockRepositoryImplTest {
     var result = stockRepository.findByStockCod("id");
     assertTrue(result.isEmpty());
     verify(stockJpaRepository, times(1)).findByStockCod("id");
-    verify(quoteJpaRepository, times(0)).findAllByStockId(any());
-  }
-
-  @Test
-  void quoteEmpty() {
-    when(quoteJpaRepository.findAllByStockId(stockEntity.getId())).thenReturn(emptyList());
-    var result = stockRepository.findByStockCod("id");
-    assertTrue(result.isPresent());
-    assertEquals(stockEntity.stockValue(emptyList()), result.orElseThrow());
-    verify(stockJpaRepository, times(1)).findByStockCod("id");
-    verify(quoteJpaRepository, times(1)).findAllByStockId(any());
   }
 
   @Test
   void findAll() {
     var result = stockRepository.findAll();
-    assertEquals(singletonList(stockEntity.stockValue(singletonList(quoteEntity))), result);
+    assertEquals(singletonList(stockEntity.stockValue()), result);
     verify(stockJpaRepository, times(1)).findAll();
-    verify(quoteJpaRepository, times(1)).findAllByStockId(any());
   }
 
   @Test
@@ -80,7 +65,6 @@ class StockRepositoryImplTest {
     var result = stockRepository.findAll();
     assertTrue(result.isEmpty());
     verify(stockJpaRepository, times(1)).findAll();
-    verify(quoteJpaRepository, times(0)).findAllByStockId(any());
   }
 
   @Test

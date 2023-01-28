@@ -1,5 +1,7 @@
 package com.quotationmanagement.externals;
 
+import static java.util.Collections.emptyList;
+
 import com.quotationmanagement.configurations.StockManagerConfig;
 import com.quotationmanagement.dtos.StockManagerDTO;
 import com.quotationmanagement.dtos.StockManagerNotificationDTO;
@@ -30,7 +32,7 @@ public class StockManagerServiceImpl implements StockManagerService {
             String.format("%s/stock", stockManagerConfig.getUrl()), StockManagerDTO[].class);
     if (result.getStatusCode().is2xxSuccessful() && result.hasBody())
       return Arrays.asList(Objects.requireNonNull(result.getBody()));
-    return Collections.emptyList();
+    return emptyList();
   }
 
   public List<StockManagerNotificationDTO> notification(StockManagerNotificationDTO request)
@@ -42,6 +44,6 @@ public class StockManagerServiceImpl implements StockManagerService {
             StockManagerNotificationDTO[].class);
     if (result.getStatusCode().is2xxSuccessful() && result.hasBody())
       return Arrays.asList(Objects.requireNonNull(result.getBody()));
-    return Collections.emptyList();
+    return emptyList();
   }
 }

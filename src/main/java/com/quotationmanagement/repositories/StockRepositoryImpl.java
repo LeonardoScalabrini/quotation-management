@@ -1,5 +1,7 @@
 package com.quotationmanagement.repositories;
 
+import static java.util.stream.Collectors.toList;
+
 import com.quotationmanagement.domains.Stock;
 import com.quotationmanagement.domains.interfaces.StockRepository;
 import com.quotationmanagement.entities.QuoteEntity;
@@ -8,7 +10,6 @@ import com.quotationmanagement.repositories.jpa.QuoteJpaRepository;
 import com.quotationmanagement.repositories.jpa.StockJpaRepository;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,19 +28,13 @@ public class StockRepositoryImpl implements StockRepository {
 
   @Override
   public Optional<Stock> findByStockCod(String cod) {
-    var result = stockJpaRepository.findByStockCod(cod);
-    if (result.isEmpty()) return Optional.empty();
-    var stock = result.orElseThrow();
-    var quotes = quoteJpaRepository.findAllByStockId(stock.getId());
-    return Optional.of(stock.stockValue(quotes));
+    return stockJpaRepository.findByStockCod(cod).map(StockEntity::stockValue);
   }
 
   @Override
   public List<Stock> findAll() {
     var result = stockJpaRepository.findAll();
-    return result.stream()
-        .map(s -> s.stockValue(quoteJpaRepository.findAllByStockId(s.getId())))
-        .collect(Collectors.toList());
+    return result.stream().map(StockEntity::stockValue).collect(toList());
   }
 
   @Override
@@ -50,9 +45,7 @@ public class StockRepositoryImpl implements StockRepository {
             .findByStockCod(stock.stockCod)
             .orElseGet(() -> stockJpaRepository.save(StockEntity.valueOf(stock)));
     quoteJpaRepository.saveAll(
-        stock.quotes.stream()
-            .map(q -> QuoteEntity.valueOf(stockEntity.getId(), q))
-            .collect(Collectors.toList()));
+        stock.quotes.stream().map(q -> QuoteEntity.valueOf(stockEntity, q)).collect(toList()));
     return stock;
   }
 }
