@@ -18,6 +18,7 @@ public class CheckStockRegistredUseCaseImpl implements CheckStockRegistredUseCas
 
   @Override
   public void check(String stockId) throws StockNotRegistredException {
-    findRegistredStock.find(stockId).orElseThrow(StockNotRegistredException::new);
+    var optional = findRegistredStock.find(stockId);
+    if (optional.isEmpty()) throw new StockNotRegistredException();
   }
 }
