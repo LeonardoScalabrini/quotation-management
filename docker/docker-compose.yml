@@ -39,4 +39,5 @@ volumes:
 
 networks:
   inatel:
-    name: inatel
+    external:
+      name: inatel

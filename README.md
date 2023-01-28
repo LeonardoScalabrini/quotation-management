@@ -11,10 +11,23 @@ mvn clean install
 
 2. Install Infraestructure
 ````
+cd docker
 docker-compose up
 ````
 
 3. Start locally
 ````
 mvn spring-boot:run
+````
+
+## Docker quick start ##
+
+1. To build image
+````
+docker build --tag=quotation-management:latest .
+````
+
+2. To run container locally
+````
+docker run --name quotation-management -p 8081:8080 -e SPRING_PROFILE=dockerdev --network=inatel quotation-management
 ````
