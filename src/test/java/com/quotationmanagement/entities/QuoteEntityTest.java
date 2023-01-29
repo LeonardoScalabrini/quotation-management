@@ -16,11 +16,11 @@ class QuoteEntityTest {
     var notEquals = QuoteEntity.valueOf(stockEntity, QUOTE);
     assertNotNull(quoteEntity.getId());
     assertEquals(stockEntity, quoteEntity.getStock());
-    assertEquals(QUOTE.price, quoteEntity.getPrice());
-    assertEquals(QUOTE.date, quoteEntity.getDate());
+    assertEquals(QUOTE.getPrice(), quoteEntity.getPrice());
+    assertEquals(QUOTE.getDate(), quoteEntity.getDate());
     assertEquals(quoteEntity, quoteEntity);
     assertEquals(
-        Objects.hash(quoteEntity.getId(), QUOTE.date, QUOTE.price, stockEntity),
+        Objects.hash(quoteEntity.getId(), QUOTE.getDate(), QUOTE.getPrice(), stockEntity),
         quoteEntity.hashCode());
     assertNotEquals(notEquals, quoteEntity);
     assertNotEquals(null, quoteEntity);

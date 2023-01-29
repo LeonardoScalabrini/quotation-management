@@ -6,14 +6,22 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class StockManagerNotificationDTO implements Serializable {
-  public final String host;
-  public final Integer port;
+  private final String host;
+  private final Integer port;
 
   @JsonCreator
   public StockManagerNotificationDTO(
       @JsonProperty("host") String host, @JsonProperty("port") Integer port) {
     this.host = host;
     this.port = port;
+  }
+
+  public String getHost() {
+    return host;
+  }
+
+  public Integer getPort() {
+    return port;
   }
 
   @Override

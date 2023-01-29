@@ -2,7 +2,7 @@ package com.quotationmanagement.externals;
 
 import static java.util.Collections.emptyList;
 
-import com.quotationmanagement.configurations.StockManagerConfig;
+import com.quotationmanagement.configurations.interfaces.StockManagerConfig;
 import com.quotationmanagement.dtos.StockManagerDTO;
 import com.quotationmanagement.dtos.StockManagerNotificationDTO;
 import com.quotationmanagement.externals.interfaces.StockManagerService;

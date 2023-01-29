@@ -15,10 +15,10 @@ class StockEntityTest {
     var stockEntity = StockEntity.valueOf(STOCK);
     var equals = StockEntity.valueOf(STOCK);
     var notEquals = StockEntity.valueOf(Stock.valueOf("id2", emptyList()));
-    assertEquals(STOCK.id, stockEntity.getId());
-    assertEquals(STOCK.stockCod, stockEntity.getStockCod());
+    assertEquals(STOCK.getId(), stockEntity.getId());
+    assertEquals(STOCK.getStockCod(), stockEntity.getStockCod());
     assertEquals(stockEntity, stockEntity);
-    assertEquals(Objects.hash(STOCK.id, STOCK.stockCod), stockEntity.hashCode());
+    assertEquals(Objects.hash(STOCK.getId(), STOCK.getStockCod()), stockEntity.hashCode());
     assertEquals(equals, stockEntity);
     assertNotEquals(notEquals, stockEntity);
     assertNotEquals(null, stockEntity);
@@ -29,7 +29,7 @@ class StockEntityTest {
   void stockValue() {
     var stockEntity = StockEntity.valueOf(STOCK);
     var stockValue = stockEntity.stockValue();
-    assertEquals(STOCK.id, stockValue.id);
-    assertEquals(STOCK.stockCod, stockValue.stockCod);
+    assertEquals(STOCK.getId(), stockValue.getId());
+    assertEquals(STOCK.getStockCod(), stockValue.getStockCod());
   }
 }

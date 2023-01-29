@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import com.quotationmanagement.externals.interfaces.StockManagerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,10 +15,10 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-class StockManagerServiceCacheTest {
+class StockManagerCacheServiceImplTest {
 
-  @Mock private StockManagerServiceImpl stockManagerService;
-  @InjectMocks private StockManagerServiceCache stockManagerServiceCache;
+  @Mock private StockManagerService stockManagerService;
+  @InjectMocks private StockManagerCacheServiceImpl stockManagerCacheService;
 
   @BeforeEach
   void setUp() {
@@ -28,9 +29,9 @@ class StockManagerServiceCacheTest {
 
   @Test
   void getStocks() {
-    StockManagerServiceCache.clean();
-    var result = stockManagerServiceCache.getStocks();
-    var result2 = stockManagerServiceCache.getStocks();
+    stockManagerCacheService.clean();
+    var result = stockManagerCacheService.getStocks();
+    var result2 = stockManagerCacheService.getStocks();
     assertEquals(singletonList(STOCK_MANAGER_DTO), result);
     assertEquals(singletonList(STOCK_MANAGER_DTO), result2);
     verify(stockManagerService, times(1)).getStocks();
@@ -38,16 +39,16 @@ class StockManagerServiceCacheTest {
 
   @Test
   void notification() {
-    var result = stockManagerServiceCache.notification(any());
+    var result = stockManagerCacheService.notification(any());
     assertEquals(singletonList(STOCK_MANAGER_NOTIFICATION_DTO), result);
     verify(stockManagerService, times(1)).notification(any());
   }
 
   @Test
   void clean() {
-    var result = stockManagerServiceCache.getStocks();
-    StockManagerServiceCache.clean();
-    var result2 = stockManagerServiceCache.getStocks();
+    var result = stockManagerCacheService.getStocks();
+    stockManagerCacheService.clean();
+    var result2 = stockManagerCacheService.getStocks();
     assertEquals(singletonList(STOCK_MANAGER_DTO), result);
     assertEquals(singletonList(STOCK_MANAGER_DTO), result2);
     verify(stockManagerService, times(2)).getStocks();

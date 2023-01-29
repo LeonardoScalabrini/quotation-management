@@ -1,6 +1,6 @@
 package com.quotationmanagement.events;
 
-import com.quotationmanagement.configurations.ApplicationConfig;
+import com.quotationmanagement.configurations.interfaces.ApplicationConfig;
 import com.quotationmanagement.dtos.StockManagerNotificationDTO;
 import com.quotationmanagement.externals.interfaces.StockManagerService;
 import org.springframework.beans.factory.annotation.Autowired;

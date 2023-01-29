@@ -4,14 +4,22 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Quote {
-  public final Date date;
-  public final Integer price;
+  private final Date date;
+  private final Integer price;
 
   public Quote(Date date, Integer price) {
     Objects.requireNonNull(date);
     Objects.requireNonNull(price);
     this.date = date;
     this.price = price;
+  }
+
+  public Date getDate() {
+    return date;
+  }
+
+  public Integer getPrice() {
+    return price;
   }
 
   @Override

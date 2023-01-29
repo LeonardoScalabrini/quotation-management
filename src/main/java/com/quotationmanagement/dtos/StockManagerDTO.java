@@ -6,14 +6,22 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class StockManagerDTO implements Serializable {
-  public final String id;
-  public final String description;
+  private final String id;
+  private final String description;
 
   @JsonCreator
   public StockManagerDTO(
       @JsonProperty("id") String id, @JsonProperty("description") String description) {
     this.id = id;
     this.description = description;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getDescription() {
+    return description;
   }
 
   @Override

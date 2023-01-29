@@ -5,9 +5,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Stock {
-  public final String id;
-  public final String stockCod;
-  public final List<Quote> quotes;
+  private final String id;
+  private final String stockCod;
+  private final List<Quote> quotes;
 
   private Stock(String id, String stockCod, List<Quote> quotes) {
     Objects.requireNonNull(id);
@@ -18,6 +18,18 @@ public class Stock {
     this.id = id;
     this.stockCod = stockCod;
     this.quotes = quotes;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getStockCod() {
+    return stockCod;
+  }
+
+  public List<Quote> getQuotes() {
+    return quotes;
   }
 
   public static Stock valueOf(String stockId, List<Quote> quotes) {

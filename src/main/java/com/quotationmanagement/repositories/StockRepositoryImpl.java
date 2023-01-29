@@ -42,10 +42,10 @@ public class StockRepositoryImpl implements StockRepository {
   public Stock save(Stock stock) {
     var stockEntity =
         stockJpaRepository
-            .findByStockCod(stock.stockCod)
+            .findByStockCod(stock.getStockCod())
             .orElseGet(() -> stockJpaRepository.save(StockEntity.valueOf(stock)));
     quoteJpaRepository.saveAll(
-        stock.quotes.stream().map(q -> QuoteEntity.valueOf(stockEntity, q)).collect(toList()));
+        stock.getQuotes().stream().map(q -> QuoteEntity.valueOf(stockEntity, q)).collect(toList()));
     return stock;
   }
 }

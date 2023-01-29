@@ -27,13 +27,14 @@ class FindByStockManagerTest {
 
   @Test
   void find() {
-    assertEquals(Optional.of(STOCK_MANAGER_DTO.id), findByStockManager.find(STOCK_MANAGER_DTO.id));
     assertEquals(
-        Optional.of(STOCK_MANAGER_DTO.id),
-        findByStockManager.find(STOCK_MANAGER_DTO.id.toLowerCase()));
+        Optional.of(STOCK_MANAGER_DTO.getId()), findByStockManager.find(STOCK_MANAGER_DTO.getId()));
     assertEquals(
-        Optional.of(STOCK_MANAGER_DTO.id),
-        findByStockManager.find(STOCK_MANAGER_DTO.id.toUpperCase()));
+        Optional.of(STOCK_MANAGER_DTO.getId()),
+        findByStockManager.find(STOCK_MANAGER_DTO.getId().toLowerCase()));
+    assertEquals(
+        Optional.of(STOCK_MANAGER_DTO.getId()),
+        findByStockManager.find(STOCK_MANAGER_DTO.getId().toUpperCase()));
     assertEquals(Optional.empty(), findByStockManager.find("notEquals"));
   }
 }

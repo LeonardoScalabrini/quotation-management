@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 class StockManagerNotificationDTOTest {
   @Test
   void parseOf() {
-    assertEquals("localhost", STOCK_MANAGER_NOTIFICATION_DTO.host);
-    assertEquals(8081, STOCK_MANAGER_NOTIFICATION_DTO.port);
+    assertEquals("localhost", STOCK_MANAGER_NOTIFICATION_DTO.getHost());
+    assertEquals(8081, STOCK_MANAGER_NOTIFICATION_DTO.getPort());
   }
 
   @Test

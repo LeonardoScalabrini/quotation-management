@@ -9,9 +9,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class StockResponseDTO implements Serializable {
-  public final String id;
-  public final String stockId;
-  public final List<QuoteDTO> quotes;
+  private final String id;
+  private final String stockId;
+  private final List<QuoteDTO> quotes;
 
   @JsonCreator
   public StockResponseDTO(
@@ -23,11 +23,23 @@ public class StockResponseDTO implements Serializable {
     this.quotes = quotes;
   }
 
+  public String getId() {
+    return id;
+  }
+
+  public String getStockId() {
+    return stockId;
+  }
+
+  public List<QuoteDTO> getQuotes() {
+    return quotes;
+  }
+
   public static StockResponseDTO parseOf(Stock stock) {
     return new StockResponseDTO(
-        stock.id,
-        stock.stockCod,
-        stock.quotes.stream().map(QuoteDTO::parseOf).collect(Collectors.toList()));
+        stock.getId(),
+        stock.getStockCod(),
+        stock.getQuotes().stream().map(QuoteDTO::parseOf).collect(Collectors.toList()));
   }
 
   @Override

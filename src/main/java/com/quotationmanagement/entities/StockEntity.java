@@ -48,7 +48,7 @@ public class StockEntity implements Serializable {
   }
 
   public static StockEntity valueOf(Stock stock) {
-    return new StockEntity(stock.id, stock.stockCod);
+    return new StockEntity(stock.getId(), stock.getStockCod());
   }
 
   @Override

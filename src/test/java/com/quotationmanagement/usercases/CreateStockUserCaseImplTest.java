@@ -29,10 +29,10 @@ class CreateStockUserCaseImplTest {
 
   @Test
   void create() throws StockNotRegistredException {
-    var result = createStockUserCase.create(STOCK.stockCod, STOCK.quotes);
-    assertNotNull(result.id);
-    assertEquals(STOCK.stockCod, result.stockCod);
-    assertEquals(STOCK.quotes, result.quotes);
+    var result = createStockUserCase.create(STOCK.getStockCod(), STOCK.getQuotes());
+    assertNotNull(result.getId());
+    assertEquals(STOCK.getStockCod(), result.getStockCod());
+    assertEquals(STOCK.getQuotes(), result.getQuotes());
     verify(stockRepository, times(1)).save(any());
     verify(checkStockRegistredUseCase, times(1)).check(anyString());
   }

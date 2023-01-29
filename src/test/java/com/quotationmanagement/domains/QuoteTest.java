@@ -14,8 +14,8 @@ class QuoteTest {
     var quote = new Quote(date, 10);
     var equals = new Quote(date, 10);
     var notEquals = new Quote(new Date(), 15);
-    assertEquals(date, quote.date);
-    assertEquals(Integer.valueOf(10), quote.price);
+    assertEquals(date, quote.getDate());
+    assertEquals(Integer.valueOf(10), quote.getPrice());
     assertEquals(equals, quote);
     assertEquals(Objects.hash(date, 10), quote.hashCode());
     assertNotEquals(notEquals, quote);

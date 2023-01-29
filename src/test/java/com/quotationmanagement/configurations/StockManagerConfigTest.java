@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = StockManagerConfig.class)
+@SpringBootTest(classes = StockManagerConfigImpl.class)
 class StockManagerConfigTest {
 
-  @Autowired private StockManagerConfig stockManagerConfig;
+  @Autowired private StockManagerConfigImpl stockManagerConfig;
 
   @Test
   void url() {

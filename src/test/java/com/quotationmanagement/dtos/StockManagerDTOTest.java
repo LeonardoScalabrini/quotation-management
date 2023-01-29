@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 class StockManagerDTOTest {
   @Test
   void parseOf() {
-    assertEquals("petr7", STOCK_MANAGER_DTO.id);
-    assertEquals("test petr", STOCK_MANAGER_DTO.description);
+    assertEquals("petr7", STOCK_MANAGER_DTO.getId());
+    assertEquals("test petr", STOCK_MANAGER_DTO.getDescription());
   }
 
   @Test

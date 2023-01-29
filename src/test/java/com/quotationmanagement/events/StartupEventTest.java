@@ -3,7 +3,7 @@ package com.quotationmanagement.events;
 import static com.quotationmanagement.fixture.Fixture.STOCK_MANAGER_NOTIFICATION_DTO;
 import static org.mockito.Mockito.*;
 
-import com.quotationmanagement.configurations.ApplicationConfig;
+import com.quotationmanagement.configurations.interfaces.ApplicationConfig;
 import com.quotationmanagement.externals.interfaces.StockManagerService;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +22,8 @@ class StartupEventTest {
 
   @BeforeEach
   void setUp() {
-    when(applicationConfig.getHost()).thenReturn(STOCK_MANAGER_NOTIFICATION_DTO.host);
-    when(applicationConfig.getPort()).thenReturn(STOCK_MANAGER_NOTIFICATION_DTO.port);
+    when(applicationConfig.getHost()).thenReturn(STOCK_MANAGER_NOTIFICATION_DTO.getHost());
+    when(applicationConfig.getPort()).thenReturn(STOCK_MANAGER_NOTIFICATION_DTO.getPort());
     when(stockManagerService.notification(STOCK_MANAGER_NOTIFICATION_DTO))
         .thenReturn(Collections.singletonList(STOCK_MANAGER_NOTIFICATION_DTO));
   }

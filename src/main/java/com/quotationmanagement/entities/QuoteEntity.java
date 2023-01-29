@@ -12,7 +12,7 @@ import org.hibernate.annotations.Immutable;
 @Immutable
 @Entity(name = "quote")
 public class QuoteEntity implements Serializable {
-  @Id private String id = UUID.randomUUID().toString();
+  @Id private final String id = UUID.randomUUID().toString();
   @NotNull @Column private Date date;
   @NotNull @Column private Integer price;
 
@@ -45,7 +45,7 @@ public class QuoteEntity implements Serializable {
   }
 
   public static QuoteEntity valueOf(StockEntity stock, Quote quote) {
-    return new QuoteEntity(quote.date, quote.price, stock);
+    return new QuoteEntity(quote.getDate(), quote.getPrice(), stock);
   }
 
   public Quote quoteValue() {

@@ -14,9 +14,9 @@ class StockTest {
     var stock = Stock.valueOf("id", "stockId", singletonList(QUOTE));
     var equals = Stock.valueOf("id", "stockId", singletonList(QUOTE));
     var notEquals = Stock.valueOf("notEquals", "notEquals", emptyList());
-    assertEquals("id", stock.id);
-    assertEquals("stockId", stock.stockCod);
-    assertEquals(singletonList(QUOTE), stock.quotes);
+    assertEquals("id", stock.getId());
+    assertEquals("stockId", stock.getStockCod());
+    assertEquals(singletonList(QUOTE), stock.getQuotes());
     assertEquals(equals, stock);
     assertEquals(Objects.hash("id", "stockId", singletonList(QUOTE)), stock.hashCode());
     assertNotEquals(notEquals, stock);
@@ -36,8 +36,8 @@ class StockTest {
   @Test
   void valueOf() {
     var stock = Stock.valueOf("stockId", singletonList(QUOTE));
-    assertNotNull(stock.id);
-    assertEquals("stockId", stock.stockCod);
-    assertEquals(singletonList(QUOTE), stock.quotes);
+    assertNotNull(stock.getId());
+    assertEquals("stockId", stock.getStockCod());
+    assertEquals(singletonList(QUOTE), stock.getQuotes());
   }
 }

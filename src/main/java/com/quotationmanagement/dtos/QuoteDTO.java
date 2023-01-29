@@ -15,10 +15,10 @@ public class QuoteDTO implements Serializable {
   private static final String FORMAT_DATE = "yyyy-MM-dd";
 
   @NotBlank(message = "The buy date is required")
-  private String buyDate;
+  private final String buyDate;
 
   @NotBlank(message = "The value is required")
-  private String value;
+  private final String value;
 
   public String getBuyDate() {
     return buyDate;
@@ -40,7 +40,7 @@ public class QuoteDTO implements Serializable {
 
   public static QuoteDTO parseOf(Quote quote) {
     return new QuoteDTO(
-        new SimpleDateFormat(FORMAT_DATE).format(quote.date), quote.price.toString());
+        new SimpleDateFormat(FORMAT_DATE).format(quote.getDate()), quote.getPrice().toString());
   }
 
   public Quote quoteValue() throws ParseException {
