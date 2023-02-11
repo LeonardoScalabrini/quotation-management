@@ -1,4 +1,4 @@
-FROM openjdk:11.0.16-slim-buster
+FROM openjdk:slim
 LABEL maintainer="leonardo_scalabrini@hotmail.com"
 ENV SPRING_PROFILE=localdocker
 ENV JAR_FILE=quotation-management-0.0.1-SNAPSHOT.jar
